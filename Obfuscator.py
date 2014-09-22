@@ -52,9 +52,9 @@ obfuscated_file = open(sys.argv[2], "w")
 #Write to destination file
 obfuscated_file.write("Dim " + pld + ", " + array + ", " + temp + "\n")
 obfuscated_file.write(pld + " = " + chr(34) + obfu(clear_text_file.read()) + chr(34) + "\n")
-obfuscated_file.write("" + array + " = Split(" + pld + ", chr(eval(" + obfu(splitter) + ")))\n")
+obfuscated_file.write(array + " = Split(" + pld + ", chr(eval(" + obfu(splitter) + ")))\n")
 obfuscated_file.write("for each " + x + " in " + array + "\n")
-obfuscated_file.write("" + temp + " = " + temp + " & chr(eval(" + x + "))\n")
+obfuscated_file.write(temp + " = " + temp + " & chr(eval(" + x + "))\n")
 obfuscated_file.write("next\n")
 obfuscated_file.write("execute(" + temp + ")\n")
 
