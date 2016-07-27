@@ -31,6 +31,10 @@ array = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase) f
 temp = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase) for _ in range(NUM_OF_CHARS))
 x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase) for _ in range(NUM_OF_CHARS))
 
+#Random Sub names
+subOne = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase) for _ in range(NUM_OF_CHARS))
+subTwo = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase) for _ in range(NUM_OF_CHARS))
+
 #Function to fill encBody variable
 #with the obfuscated content
 def obfu(body):
@@ -63,12 +67,18 @@ obfuscated_file = open(sys.argv[2], "w")
 
 #Write to destination file
 obfuscated_file.write(randCapitalization("Dim " + pld + ", " + array + ", " + temp) + "\n")
+obfuscated_file.write(randCapitalization("Sub " + subOne) + "\n")
 obfuscated_file.write(randCapitalization(pld + " = ") + chr(34) + obfu(clear_text_file.read()) + chr(34) + "\n")
 obfuscated_file.write(randCapitalization(array + " = Split(" + pld + ", chr(eval(") + obfu(splitter) + ")))\n")
 obfuscated_file.write(randCapitalization("for each " + x + " in " + array) + "\n")
 obfuscated_file.write(randCapitalization(temp + " = " + temp + " & chr(eval(" + x) + "))\n")
 obfuscated_file.write(randCapitalization("next") + "\n")
-obfuscated_file.write(randCapitalization("execute(" + temp) + ")\n")
+obfuscated_file.write(randCapitalization(subTwo) + "\n")
+obfuscated_file.write(randCapitalization("End Sub") + "\n")
+obfuscated_file.write(randCapitalization("Sub " + subTwo) + "\n")
+obfuscated_file.write(randCapitalization("eval(execute(" + temp) + "))\n")
+obfuscated_file.write(randCapitalization("End Sub") + "\n")
+obfuscated_file.write(randCapitalization(subOne) + "\n")
 
 #Close file handles before exit
 clear_text_file.close()
